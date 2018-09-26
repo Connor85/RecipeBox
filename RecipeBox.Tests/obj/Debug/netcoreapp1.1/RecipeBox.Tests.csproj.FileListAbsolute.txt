@@ -1,0 +1,13 @@
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.Tests.deps.json
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.Tests.runtimeconfig.json
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.Tests.runtimeconfig.dev.json
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/obj/Debug/netcoreapp1.1/RecipeBox.Tests.AssemblyInfo.cs
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.Tests.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.Tests.pdb
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/bin/Debug/netcoreapp1.1/RecipeBox.pdb
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/obj/Debug/netcoreapp1.1/RecipeBox.Tests.dll
+/Users/Guest/Desktop/RecipeBox.Solution/RecipeBox.Tests/obj/Debug/netcoreapp1.1/RecipeBox.Tests.pdb
