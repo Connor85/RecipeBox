@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RecipeBox.Models;
+using System;
 
 namespace RecipeBox.Controllers
 {
@@ -22,7 +23,7 @@ namespace RecipeBox.Controllers
     [HttpPost("/recipes")]
     public ActionResult Create()
     {
-      Recipe newRecipe = new Recipe(Request.Form["recipe-name"], Request.Form["recipe-number"]);
+      Recipe newRecipe = new Recipe(Request.Form["recipe-name"], Request.Form["recipe-instruction"]);
       newRecipe.Save();
       return RedirectToAction("Index");
     }
@@ -55,27 +56,27 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpGet("/recipes/{recipeId}/update")]
-    public ActionResult UpdateForm(int recipeId)
-    {
-       Recipe thisRecipe = Recipe.Find(recipeId);
-       return View("update", thisRecipe);
-    }
-
-    [HttpPost("/recipes/{recipeId}/update")]
-    public ActionResult Update(int recipeId)
-    {
-      Recipe thisRecipe = Recipe.Find(recipeId);
-      thisRecipe.Edit(Request.Form["new-recipe-name"], Request.Form["new-recipe-number"]);
-      return RedirectToAction("Index");
-    }
-
-    [HttpGet("/recipes/{recipeid}/delete")]
-    public ActionResult DeleteOne(int recipeId)
-    {
-      Recipe thisRecipe = Recipe.Find(recipeId);
-      thisRecipe.Delete();
-      return RedirectToAction("Index");
-    }
+    // [HttpGet("/recipes/{recipeId}/update")]
+    // public ActionResult UpdateForm(int recipeId)
+    // {
+    //    Recipe thisRecipe = Recipe.Find(recipeId);
+    //    return View("update", thisRecipe);
+    // }
+    //
+    // [HttpPost("/recipes/{recipeId}/update")]
+    // public ActionResult Update(int recipeId)
+    // {
+    //   Recipe thisRecipe = Recipe.Find(recipeId);
+    //   thisRecipe.Edit(Request.Form["new-recipe-name"], Request.Form["new-recipe-number"]);
+    //   return RedirectToAction("Index");
+    // }
+    //
+    // [HttpGet("/recipes/{recipeid}/delete")]
+    // public ActionResult DeleteOne(int recipeId)
+    // {
+    //   Recipe thisRecipe = Recipe.Find(recipeId);
+    //   thisRecipe.Delete();
+    //   return RedirectToAction("Index");
+    // }
   }
 }

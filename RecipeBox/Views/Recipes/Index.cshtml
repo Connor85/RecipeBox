@@ -8,8 +8,9 @@
 <ul>
 @foreach (var recipe in Model)
 {
-<li>@recipe.GetName()</li>
+<li><a href ="/recipes/@recipe.GetId()">@recipe.GetName()</a></li>
 }
 </ul>
 <a href = "/" class = "btn btn-info">Home</a>
+<a href = "/recipes/new" class = "btn btn-success">Add Recipe</a>
 </div>
