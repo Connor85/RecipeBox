@@ -124,5 +124,64 @@ namespace RecipeBox.Models
       }
       return foundCategory;
     }
+
+    public void AddRecipe(Recipe newRecipe)
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"INSERT INTO categories_recipes (category_id, recipe_id) VALUES (@categoryId, @recipeId);";
+
+            MySqlParameter category_id = new MySqlParameter();
+            category_id.ParameterName = "@categoryId";
+            category_id.Value = newRecipe.GetId();
+            cmd.Parameters.Add(category_id);
+
+            MySqlParameter recipe_id = new MySqlParameter();
+            recipe_id.ParameterName = "@recipeId";
+            recipe_id.Value = _id;
+            cmd.Parameters.Add(recipe_id);
+
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+              conn.Dispose();
+            }
+        }
+
+        public List<Recipe> GetRecipes()
+        {
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT recipes.* FROM categories
+          JOIN categories_recipes ON (category.id = categories_recipes.category_id)
+          JOIN recipes ON (categories_recipes.recipe_id = recipes.id)
+          WHERE categories.id = @categoryId;";
+
+          MySqlParameter recipeIdParameter = new MySqlParameter();
+          categoryIdParameter.ParameterName = "@categoryId";
+          categoryIdParameter.Value = _id;
+          cmd.Parameters.Add(categoryIdParameter);
+
+          MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+          List<Recipe> recipes = new List<Recipe>{};
+
+          while(rdr.Read())
+          {
+            int recipeId = rdr.GetInt32(0);
+            string recipeName = rdr.GetString(1);
+
+            Recipe newRecipe = new Recipe(recipeName, recipeId);
+            recipes.Add(newRecipe);
+          }
+          conn.Close();
+          if (conn != null)
+          {
+            conn.Dispose();
+          }
+          return recipes;
+        }
   }
 }

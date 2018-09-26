@@ -212,5 +212,142 @@ namespace RecipeBox.Models
           }
           return categories;
         }
+
+        public void AddTag(Tag newTag)
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO tags_recipes (tag_id, recipe_id) VALUES (@tagId, @recipeId);";
+
+        MySqlParameter tag_id = new MySqlParameter();
+        tag_id.ParameterName = "@tagId";
+        tag_id.Value = newTag.GetId();
+        cmd.Parameters.Add(tag_id);
+
+        MySqlParameter recipe_id = new MySqlParameter();
+        recipe_id.ParameterName = "@recipeId";
+        recipe_id.Value = _id;
+        cmd.Parameters.Add(recipe_id);
+
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+    }
+    public List<Tag> GetTags()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT tags.* FROM recipes
+      JOIN recipes_tags ON (recipes.id = recipes_tags.recipe_id)
+      JOIN tags ON (recipes_tags.tag_id = tags.id)
+      WHERE recipes.id = @recipeId;";
+
+      MySqlParameter recipeIdParameter = new MySqlParameter();
+      recipeIdParameter.ParameterName = "@recipeId";
+      recipeIdParameter.Value = _id;
+      cmd.Parameters.Add(recipeIdParameter);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Tag> tags = new List<Tag>{};
+
+      while(rdr.Read())
+      {
+        int recipeId = rdr.GetInt32(0);
+        string recipeName = rdr.GetString(1);
+
+        Tag newTag = new Tag(recipeName, recipeId);
+        tags.Add(newTag);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return tags;
+    }
+
+
+    public void AddIngredient(Ingredient newIngredient)
+        {
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"INSERT INTO ingredients_recipes (ingredient_id, recipe_id) VALUES (@ingredientId, @courseId);";
+
+          MySqlParameter ingredient_id = new MySqlParameter();
+          ingredient_id.ParameterName = "@ingredientId";
+          ingredient_id.Value = newIngredient.GetId();
+          cmd.Parameters.Add(ingredient_id);
+
+          MySqlParameter recipe_id = new MySqlParameter();
+          recipe_id.ParameterName = "@recipeId";
+          recipe_id.Value = _id;
+          cmd.Parameters.Add(recipe_id);
+
+          cmd.ExecuteNonQuery();
+          conn.Close();
+          if (conn != null)
+          {
+            conn.Dispose();
+          }
+        }
+
+
+        public List<Ingredient> GetIngredients()
+        {
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"SELECT ingredient_id FROM ingredients_recipes WHERE recipe_id = @recipeId;";
+
+          MySqlParameter recipeIdParameter = new MySqlParameter();
+          recipeIdParameter.ParameterName = "@recipeId";
+          recipeIdParameter.Value = _id;
+          cmd.Parameters.Add(recipeIdParameter);
+
+          var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+          List<int> ingredientIds = new List<int> {};
+          while(rdr.Read())
+          {
+            int ingredientId = rdr.GetInt32(0);
+            ingredientIds.Add(ingredientId);
+          }
+          rdr.Dispose();
+
+          List<Ingredient> ingredients = new List<Ingredient> {};
+          foreach (int ingredientId in ingredientIds)
+          {
+            var ingredientQuery = conn.CreateCommand() as MySqlCommand;
+            ingredientQuery.CommandText = @"SELECT * FROM ingredients WHERE id = @ingredientId;";
+
+            MySqlParameter ingredientIdParameter = new MySqlParameter();
+            ingredientIdParameter.ParameterName = "@ingredientId";
+            ingredientIdParameter.Value = ingredientId;
+            ingredientQuery.Parameters.Add(ingredientIdParameter);
+
+            var ingredientQueryRdr = ingredientQuery.ExecuteReader() as MySqlDataReader;
+            while(ingredientQueryRdr.Read())
+            {
+              int thisIngredientId = ingredientQueryRdr.GetInt32(0);
+              string ingredientName = ingredientQueryRdr.GetString(1);
+
+              Ingredient foundIngredient = new Ingredient(ingredientName, thisIngredientId);
+              ingredients.Add(foundIngredient);
+            }
+            ingredientQueryRdr.Dispose();
+          }
+          conn.Close();
+          if (conn != null)
+          {
+            conn.Dispose();
+          }
+          return ingredients;
+        }
   }
 }

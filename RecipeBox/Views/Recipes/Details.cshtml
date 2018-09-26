@@ -19,6 +19,31 @@
     }
   </ul>
 }
+
+<hr />
+@if (Model["recipeTags"].Count != 0)
+{
+  <h4>This recipe has these tags:</h4>
+  <ul>
+    @foreach (var tag in Model["recipeTags"])
+    {
+      <li>@tag.GetName()</li>
+    }
+  </ul>
+}
+
+<hr />
+@if (Model["recipeIngredients"].Count != 0)
+{
+  <h4>This recipe has these ingredients:</h4>
+  <ul>
+    @foreach (var ingredient in Model["recipeIngredients"])
+    {
+      <li>@ingredient.GetName()</li>
+    }
+  </ul>
+}
+
 <h4>Add a category to this recipe:</h4>
 <form action='/categories/@Model["selectedRecipe"].GetId()/recipes/new' method='post'>
   <label for='category-id'>Select a category</label>
@@ -31,7 +56,31 @@
   <button type='submit'>Add</button>
 </form>
 
+<h4>Add a tag to this recipe:</h4>
+<form action='/recipes/@Model["selectedRecipe"].GetId()/tag/new' method='post'>
+  <label for='tag-id'>Select a tag</label>
+  <select id='tag-id' name='tag-id' type='text'>
+    @foreach (var tag in @Model["allTags"])
+    {
+      <option value='@tag.GetId()'>@tag.GetName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h4>Add a category to this recipe:</h4>
+<form action='/recipes/@Model["selectedRecipe"].GetId()/ingredients/new' method='post'>
+  <label for='ingredient-id'>Select a ingredient</label>
+  <select id='ingredient-id' name='ingredient-id' type='text'>
+    @foreach (var ingredient in @Model["allIngredients"])
+    {
+      <option value='@ingredient.GetId()'>@ingredient.GetName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
 <p><a href="/categories/">Return to Category List</a></p>
-<p><a href="/recipes/@Model["selectedRecipe"].GetId()/update">Edit Student</a></p>
-<p><a href="/recipes/@Model["selectedRecipe"].GetId()/delete">Delete Student</a></p>
+<p><a href="/recipes/@Model["selectedRecipe"].GetId()/update">Edit Recipe</a></p>
+<p><a href="/recipes/@Model["selectedRecipe"].GetId()/delete">Delete Recipe</a></p>
 <p><a href="/">Return to Main Page</a></p>

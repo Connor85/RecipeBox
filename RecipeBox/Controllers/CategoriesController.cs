@@ -34,18 +34,18 @@ namespace RecipeBox.Controllers
       return RedirectToAction("Index");
     }
 
-    // [HttpGet("/categories/{id}")]
-    // public ActionResult Details(int id)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category selectedCategory = Category.Find(id);
-    //   // List<Recipe> categoryRecipes = selectedCategory.GetRecipes();
-    //   List<Recipe> allRecipes = Recipe.GetAll();
-    //   model.Add("selectedCategory", selectedCategory);
-    //   // model.Add("categoryRecipes", categoryRecipes);
-    //   model.Add("allRecipes", allRecipes);
-    //   return View(model);
-    // }
+    [HttpGet("/categories/{id}")]
+    public ActionResult Details(int id)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Category selectedCategory = Category.Find(id);
+      // List<Recipe> categoryRecipes = selectedCategory.GetRecipes();
+      List<Recipe> allRecipes = Recipe.GetAll();
+      model.Add("selectedCategory", selectedCategory);
+      // model.Add("categoryRecipes", categoryRecipes);
+      model.Add("allRecipes", allRecipes);
+      return View(model);
+    }
     //
     // [HttpGet("/categories/{id}/recipes/new")]
     // public ActionResult CreateRecipeForm()
