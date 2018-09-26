@@ -4,12 +4,13 @@ using RecipeBox.Models;
 
 namespace RecipeBox.Controllers
 {
-    public class HomeController : Controller
+    public class RecipesController : Controller
     {
-      [HttpGet("/")]
+      [HttpGet("/recipes")]
       public ActionResult Index()
       {
-        return View();
+        List<Recipe> allRecipes = Recipe.GetAll();
+        return View(allRecipes);
       }
     }
 }
