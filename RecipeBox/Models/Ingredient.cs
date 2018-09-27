@@ -160,7 +160,7 @@ namespace RecipeBox.Models
           JOIN recipes ON (ingredients_recipes.recipe_id = recipes.id)
           WHERE ingredients.id = @ingredientId;";
 
-          MySqlParameter recipeIdParameter = new MySqlParameter();
+          MySqlParameter ingredientIdParameter = new MySqlParameter();
           ingredientIdParameter.ParameterName = "@ingredientId";
           ingredientIdParameter.Value = _id;
           cmd.Parameters.Add(ingredientIdParameter);
@@ -172,8 +172,10 @@ namespace RecipeBox.Models
           {
             int recipeId = rdr.GetInt32(0);
             string recipeName = rdr.GetString(1);
+            string recipeInstructions = rdr.GetString(2);
 
-            Recipe newRecipe = new Recipe(recipeName, recipeId);
+
+            Recipe newRecipe = new Recipe(recipeName, recipeInstructions, recipeId);
             recipes.Add(newRecipe);
           }
           conn.Close();

@@ -3,15 +3,13 @@
 }
 
 <div class="container">
-<h1 class="jumbotron">Add a new recipe</h1>
+<h1 class="jumbotron">Add a new tag</h1>
 <hr>
-<form action="/recipes/" method="post">
-  <label for="recipe-name">Recipe name:</label>
-  <input id="recipe-name" name="recipe-name" type="text">
-  <label for="recipe-instruction">Instructions:</label>
-  <input id="recipe-instruction" name="recipe-instruction" type="string">
-  <button type="submit">Add new recipe</button>
+<form action="/tags/" method="post">
+  <label for="tag-name">Recipe name:</label>
+  <input id="tag-name" name="tag-name" type="text">
+  <button type="submit">Add new tag</button>
 </form>
 <hr>
-<a href="/recipes" class="btn btn-warning">View all recipes</a>
+<a href="/tags" class="btn btn-warning">View all tags</a>
 </div>

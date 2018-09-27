@@ -243,8 +243,8 @@ namespace RecipeBox.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT tags.* FROM recipes
-      JOIN recipes_tags ON (recipes.id = recipes_tags.recipe_id)
-      JOIN tags ON (recipes_tags.tag_id = tags.id)
+      JOIN tags_recipes ON (recipes.id = tags_recipes.recipe_id)
+      JOIN tags ON (tags_recipes.tag_id = tags.id)
       WHERE recipes.id = @recipeId;";
 
       MySqlParameter recipeIdParameter = new MySqlParameter();

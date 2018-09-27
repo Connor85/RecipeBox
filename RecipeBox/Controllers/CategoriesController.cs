@@ -39,10 +39,10 @@ namespace RecipeBox.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Category selectedCategory = Category.Find(id);
-      // List<Recipe> categoryRecipes = selectedCategory.GetRecipes();
+      List<Recipe> categoryRecipes = selectedCategory.GetRecipes();
       List<Recipe> allRecipes = Recipe.GetAll();
       model.Add("selectedCategory", selectedCategory);
-      // model.Add("categoryRecipes", categoryRecipes);
+      model.Add("categoryRecipes", categoryRecipes);
       model.Add("allRecipes", allRecipes);
       return View(model);
     }

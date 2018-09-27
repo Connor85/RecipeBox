@@ -1,0 +1,37 @@
+
+@using RecipeBox.Models;
+@{
+  Layout = "_Layout";
+}
+
+<h1>Recipe</h1>
+<h2>Recipe Name: @Model["selectedRecipe"].GetName()</h2>
+<h2>Instructions: @Model["selectedRecipe"].GetInstructions()</h2>
+
+<hr />
+@if (Model["recipeCategories"].Count != 0)
+{
+  <h4>This student has these courses:</h4>
+  <ul>
+    @foreach (var category in Model["recipeCategories"])
+    {
+      <li>@category.GetName()</li>
+    }
+  </ul>
+}
+<h4>Add a category to this recipe:</h4>
+<form action='/categories/@Model["selectedRecipe"].GetId()/recipes/new' method='post'>
+  <label for='category-id'>Select a category</label>
+  <select id='category-id' name='category-id' type='text'>
+    @foreach (var category in @Model["allCategories"])
+    {
+      <option value='@category.GetId()'>@category.GetName()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<p><a href="/categories/">Return to Category List</a></p>
+<p><a href="/recipes/@Model["selectedRecipe"].GetId()/update">Edit Student</a></p>
+<p><a href="/recipes/@Model["selectedRecipe"].GetId()/delete">Delete Student</a></p>
+<p><a href="/">Return to Main Page</a></p>

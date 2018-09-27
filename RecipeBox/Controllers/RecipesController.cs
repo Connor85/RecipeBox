@@ -41,11 +41,11 @@ namespace RecipeBox.Controllers
       List<Ingredient> allIngredients = Ingredient.GetAll();
       model.Add("selectedRecipe", selectedRecipe);
       model.Add("recipeCategories", recipeCategories);
-      model.Add("recipeTags", selectedRecipe);
-      model.Add("recipeIngredients", selectedRecipe);
+      model.Add("recipeTags", recipeTags);
+      model.Add("recipeIngredients", recipeIngredients);
       model.Add("allCategories", allCategories);
-      model.Add("allTags", allCategories);
-      model.Add("allIngredients", allCategories);
+      model.Add("allTags", allTags);
+      model.Add("allIngredients", allIngredients);
       return View(model);
     }
 
