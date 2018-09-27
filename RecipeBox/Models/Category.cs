@@ -134,12 +134,12 @@ namespace RecipeBox.Models
 
             MySqlParameter category_id = new MySqlParameter();
             category_id.ParameterName = "@categoryId";
-            category_id.Value = newRecipe.GetId();
+            category_id.Value = _id;
             cmd.Parameters.Add(category_id);
 
             MySqlParameter recipe_id = new MySqlParameter();
             recipe_id.ParameterName = "@recipeId";
-            recipe_id.Value = _id;
+            recipe_id.Value = newRecipe.GetId();
             cmd.Parameters.Add(recipe_id);
 
             cmd.ExecuteNonQuery();
@@ -156,7 +156,7 @@ namespace RecipeBox.Models
           conn.Open();
           MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
           cmd.CommandText = @"SELECT recipes.* FROM categories
-          JOIN categories_recipes ON (category.id = categories_recipes.category_id)
+          JOIN categories_recipes ON (categories.id = categories_recipes.category_id)
           JOIN recipes ON (categories_recipes.recipe_id = recipes.id)
           WHERE categories.id = @categoryId;";
 

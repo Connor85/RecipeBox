@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using RecipeBox.Models;
+using System;
 
 namespace RecipeBox.Controllers
 {
@@ -46,22 +47,22 @@ namespace RecipeBox.Controllers
       model.Add("allRecipes", allRecipes);
       return View(model);
     }
-    //
-    // [HttpGet("/categories/{id}/recipes/new")]
-    // public ActionResult CreateRecipeForm()
-    // {
-    //   return View("~/Views/Recipes/CreateForm.cshtml");
-    // }
-    //
-    // [HttpPost("/categories/{categoryId}/recipes/new")]
-    // public ActionResult AddRecipe(int categoryId)
-    // {
-    //   Category category = Category.Find(categoryId);
-    //   Recipe recipe = Recipe.Find(Int32.Parse(Request.Form["recipe-id"]));
-    //   category.AddRecipe(recipe);
-    //   return RedirectToAction("Index");
-    // }
-    //
+
+    [HttpGet("/categories/{id}/recipes/new")]
+    public ActionResult CreateRecipeForm()
+    {
+      return View("~/Views/Recipes/CreateForm.cshtml");
+    }
+
+    [HttpPost("/categories/{categoryId}/recipes/new")]
+    public ActionResult AddRecipe(int categoryId)
+    {
+      Category category = Category.Find(categoryId);
+      Recipe recipe = Recipe.Find(Int32.Parse(Request.Form["recipe-id"]));
+      category.AddRecipe(recipe);
+      return RedirectToAction("Details", new {id = categoryId});
+    }
+
     // [HttpGet("/categories/{categoryId}/update")]
     // public ActionResult UpdateForm(int categoryId)
     // {

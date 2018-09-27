@@ -3,14 +3,14 @@
 }
 
 <div class="container">
-<h1>Recipe List</h1>
+<h1>Tag List</h1>
 
 <ul>
-@foreach (var recipe in Model)
+@foreach (var tag in Model)
 {
-<li><a href ="/recipes/@recipe.GetId()">@recipe.GetName()</a></li>
+<li><a href ="/tags/@tag.GetId()">@tag.GetName()</a></li>
 }
 </ul>
 <a href = "/" class = "btn btn-info">Home</a>
-<a href = "/recipes/new" class = "btn btn-success">Add Recipe</a>
+<a href = "/tags/new" class = "btn btn-success">Add Tag</a>
 </div>

@@ -57,7 +57,7 @@
 </form>
 
 <h4>Add a tag to this recipe:</h4>
-<form action='/recipes/@Model["selectedRecipe"].GetId()/tag/new' method='post'>
+<form action='/recipes/@Model["selectedRecipe"].GetId()/tags/new' method='post'>
   <label for='tag-id'>Select a tag</label>
   <select id='tag-id' name='tag-id' type='text'>
     @foreach (var tag in @Model["allTags"])

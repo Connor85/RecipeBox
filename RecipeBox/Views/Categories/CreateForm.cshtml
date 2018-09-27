@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container">
+<h1 class="jumbotron">Add a new category</h1>
+<hr>
+<form action="/categories/" method="post">
+  <label for="category-name">Category name:</label>
+  <input id="category-name" name="categoryName" type="text">
+  <button type="submit">Add new category</button>
+</form>
+<hr>
+<a href="/categories" class="btn btn-warning">View all categories</a>
+</div>

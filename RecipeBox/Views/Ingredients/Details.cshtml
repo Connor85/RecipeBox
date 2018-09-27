@@ -4,34 +4,33 @@
   Layout = "_Layout";
 }
 
-<h1>Recipe</h1>
-<h2>Recipe Name: @Model["selectedRecipe"].GetName()</h2>
-<h2>Instructions: @Model["selectedRecipe"].GetInstructions()</h2>
+<h1>Ingredient</h1>
+<h2>Ingredient Name: @Model["selectedIngredient"].GetName()</h2>
 
 <hr />
-@if (Model["recipeCategories"].Count != 0)
+@if (Model["ingredientRecipes"].Count != 0)
 {
-  <h4>This student has these courses:</h4>
+  <h4>This ingredient has these recipes:</h4>
   <ul>
-    @foreach (var category in Model["recipeCategories"])
+    @foreach (var recipe in Model["ingredientRecipes"])
     {
-      <li>@category.GetName()</li>
+      <li>@recipe.GetName()</li>
     }
   </ul>
 }
-<h4>Add a category to this recipe:</h4>
-<form action='/categories/@Model["selectedRecipe"].GetId()/recipes/new' method='post'>
-  <label for='category-id'>Select a category</label>
-  <select id='category-id' name='category-id' type='text'>
-    @foreach (var category in @Model["allCategories"])
+<h4>Add a recipe to this ingredient:</h4>
+<form action='/ingredients/@Model["selectedIngredient"].GetId()/recipes/new' method='post'>
+  <label for='ingredient-id'>Select a ingredient</label>
+  <select id='ingredient-id' name='ingredient-id' type='text'>
+    @foreach (var ingredient in @Model["allRecipes"])
     {
-      <option value='@category.GetId()'>@category.GetName()</option>
+      <option value='@ingredient.GetId()'>@ingredient.GetName()</option>
     }
   </select>
   <button type='submit'>Add</button>
 </form>
 
-<p><a href="/categories/">Return to Category List</a></p>
-<p><a href="/recipes/@Model["selectedRecipe"].GetId()/update">Edit Student</a></p>
-<p><a href="/recipes/@Model["selectedRecipe"].GetId()/delete">Delete Student</a></p>
+<p><a href="/ingredients/">Return to Ingredient List</a></p>
+<p><a href="/ingredients/@Model["selectedIngredient"].GetId()/update">Edit Ingredient</a></p>
+<p><a href="/ingredients/@Model["selectedIngredient"].GetId()/delete">Delete Ingredient</a></p>
 <p><a href="/">Return to Main Page</a></p>
